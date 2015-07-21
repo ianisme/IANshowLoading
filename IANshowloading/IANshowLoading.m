@@ -36,7 +36,7 @@
     }
     self.loadingImageView.backgroundColor = [UIColor clearColor];
     self.loadingImageView.animationImages = imgArray;
-    self.loadingImageView.animationDuration = 0.5f;
+    self.loadingImageView.animationDuration = 0.4f;
     [self addSubview:self.loadingImageView];
     [self.loadingImageView startAnimating];
 
