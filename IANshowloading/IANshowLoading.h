@@ -12,6 +12,10 @@
 
 + (void)showLoadingForView:(UIView *)view;
 + (void)showLoadingForView:(UIView *)view allowUserInteraction:(BOOL)allowUserInteraction;
+
++ (void)showGrayLoadingForView:(UIView *)view;
++ (void)showGrayLoadingForView:(UIView *)view allowUserInteraction:(BOOL)allowUserInteraction;
+
 + (BOOL)hideLoadingForView:(UIView *)view;
 
 @end
