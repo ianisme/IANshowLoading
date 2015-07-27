@@ -19,18 +19,18 @@
     
     for (NSUInteger i = 0; i < 3; i++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(self.view.bounds.size.width/2 - 30, 50 + i*30, 60, 20);
+        btn.frame = CGRectMake(15, self.view.frame.size.height - (i+1)*50, self.view.frame.size.width - 30, 40);
         btn.backgroundColor = [UIColor blackColor];
         btn.titleLabel.textColor = [UIColor whiteColor];
         btn.tag = 1001 + i;
         [self.view addSubview:btn];
         [btn addTarget:self action:@selector(Click:) forControlEvents:UIControlEventTouchUpInside];
         if (i == 0) {
-            [btn setTitle:@"simple" forState:UIControlStateNormal];
+            [btn setTitle:@"Hide" forState:UIControlStateNormal];
         } else if(i == 1) {
-            [btn setTitle:@"gray" forState:UIControlStateNormal];
+            [btn setTitle:@"ShowGray" forState:UIControlStateNormal];
         } else {
-            [btn setTitle:@"hide" forState:UIControlStateNormal];
+            [btn setTitle:@"Show" forState:UIControlStateNormal];
         }
             
     }
@@ -39,11 +39,11 @@
 - (void)Click:(UIButton *)btn
 {
     if (btn.tag == 1001) {
-        [IANshowLoading showLoadingForView:self.view allowUserInteraction:YES];
+        [IANshowLoading hideLoadingForView:self.view];
     }else if(btn.tag == 1002) {
         [IANshowLoading showGrayLoadingForView:self.view allowUserInteraction:YES];
     } else {
-        [IANshowLoading hideLoadingForView:self.view];
+        [IANshowLoading showLoadingForView:self.view allowUserInteraction:YES];
     }
 
 }
