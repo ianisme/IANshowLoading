@@ -42,6 +42,13 @@ static NSUInteger const IANloadingImageViewHeight = 50;
 
 + (void)showLoadingForView:(UIView *)view allowUserInteraction:(BOOL)allowUserInteraction
 {
+    NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
+    for (UIView *subview in subviewsEnum) {
+        if ([subview isKindOfClass:self]) {
+            return ;
+        }
+    }
+
     IANshowLoading *loadingView = [[self alloc] initWithView:view isHudView:NO];
     loadingView.userInteractionEnabled = !allowUserInteraction;
     loadingView.alpha = 0;
@@ -56,6 +63,13 @@ static NSUInteger const IANloadingImageViewHeight = 50;
 
 + (void)showGrayLoadingForView:(UIView *)view allowUserInteraction:(BOOL)allowUserInteraction
 {
+    NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
+    for (UIView *subview in subviewsEnum) {
+        if ([subview isKindOfClass:self]) {
+            return ;
+        }
+    }
+    
     IANshowLoading *loadingView = [[self alloc] initWithView:view isHudView:YES];
     loadingView.userInteractionEnabled = !allowUserInteraction;
     loadingView.alpha = 0;
@@ -103,11 +117,25 @@ static NSUInteger const IANloadingImageViewHeight = 50;
 
 + (instancetype)gearLoadingForView:(UIView *)view
 {
+    NSMutableArray *array = [NSMutableArray array];
     NSEnumerator *subviewsEnum = [view.subviews reverseObjectEnumerator];
     for (UIView *subview in subviewsEnum) {
         if ([subview isKindOfClass:self]) {
-            return (IANshowLoading *)subview;
+            [array addObject:(IANshowLoading *)subview];
         }
+    }
+    if (array.count>1) {
+        for (NSUInteger j = 0; j < array.count; j++) {
+            IANshowLoading *loadingView = (IANshowLoading *)array[j];
+            if (j != array.count - 1) {
+                [loadingView removeFromSuperview];
+            }
+            if (j == array.count - 1){
+                return (IANshowLoading *)array[j];
+            }
+        }
+    }else {
+        return (IANshowLoading *)array.firstObject;
     }
     return nil;
 }
