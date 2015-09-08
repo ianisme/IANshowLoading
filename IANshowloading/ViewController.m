@@ -43,7 +43,7 @@
     }else if(btn.tag == 1002) {
         [IANshowLoading showGrayLoadingForView:self.view allowUserInteraction:YES];
     } else {
-        [IANshowLoading showLoadingForView:self.view]; //
+        [IANshowLoading showLoadingForView:self.view allowUserInteraction:YES]; //
     }
 
 }
